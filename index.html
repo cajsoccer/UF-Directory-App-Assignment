@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body ng-app="directoryApp">
+    <div class="container">
+      <div class="row">
+        <h1>UF Directory App</h1>
+      </div>
+      <div class="row" ng-controller="ListingsController">
+        <div class="col-md-6">
+          <div class="input-group" id="searchBar">
+            <!-- 
+
+                Implement a way to filter through listings using the search bar 
+
+              -->
+            <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
+            <input type="text" class="form-control" placeholder="Search" ng-model="search_value" ng-change="search()">
+          </div>
+          <div class="tableWrapper">
+            <table class="table table-striped table-hover">
+              <tr>
+                <th>Code</th>
+                <th>Building Name</th>
+              </tr>
+              <tr ng-repeat="listing in visible_listings" ng-click="showDetails($index)">
+                <th>{{listing.code}}</th>
+                <th>{{listing.name}}</th>
+              </tr>
+              <!-- 
+
+                  Fill in the rest of the table:
+                      * populate the rows with the code and name of each listing
+                      * include a way to remove individual listings
+
+                --> 
+            </table>
+          </div>
+          <!-- 
+
+              Write an HTML form that adds new listings to the directory 
+
+            -->
+        </div>
+        <div class="col-md-6">
+          <div class="jumbotron">
+            <h2 ng-model="detailedInfo">Detailed Information</h2>
+            <table class="table table-striped table-hover">
+            <tr>
+              <th>Code</th>
+              <th>{{detailedInfo.code}}</th>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <th>{{detailedInfo.name}}</th>
+            </tr>
+            <tr>
+              <th>Latitude</th>
+              <th>{{detailedInfo.coordinates.latitude}}</th>
+            </tr>
+            <tr>
+              <th>Longitude</th>
+              <th>{{detailedInfo.coordinates.longitude}}</th>
+            </tr>
+            <tr>
+              <th>Address</th>
+              <th>{{detailedInfo.address}}</th>
+            </tr>
+            </table>
+            <input type="button" value="Delete Listing" ng-click="deleteListing($scope.detailedInfo.index)">
+            <!-- 
+
+              Include a way to display detailed information about an individual listing:
+                   * consider how to use ng-click within the the table to implement this feature
+
+             -->
+          </div>
+        </div>
+        <div class="col-md-6">
+            <div class="jumbotron">
+              <h2>New Listing</h2>
+              <table class="table table-striped table-hover">
+              <tr>
+                <th>Code</th>
+                <th><input type="text" ng-model="newl.code"></th>
+              </tr>
+              <tr>
+                <th>Name</th>
+                <th><input type="text" ng-model="newl.name"></th>
+              </tr>
+              <tr>
+                <th>Latitude</th>
+                <th><input type="text" ng-model="newl.coordinates.latitude"></th>
+              </tr>
+              <tr>
+                <th>Longitude</th>
+                <th><input type="text" ng-model="newl.coordinates.longitude"></th>
+              </tr>
+              <tr>
+                <th>Address</th>
+                <th><input type="text" ng-model="newl.address"></th>
+              </tr>
+              </table>
+              <input type="button" value="Add Listing" ng-click="addListing()">
+              <!-- 
+  
+                Include a way to display detailed information about an individual listing:
+                     * consider how to use ng-click within the the table to implement this feature
+  
+               -->
+            </div>
+          </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+    <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+    <script src="app.js"></script>
+    <script src="listingController.js"></script>
+    <script src="listingFactory.js"></script>
+  </body>
+</html>
